@@ -1,0 +1,18 @@
+puts "Input your email:"
+user = User.create!(email: gets.chomp)
+
+puts "What do you want to do? \n
+0. Create shortened url \n
+1. Visit shortened url"
+choice = gets.chomp
+
+puts "Type in your long url"
+shortened_url = ShortenedUrl.create_for_user_and_long_url!(user, gets.chomp)
+
+if choice == "1"
+  puts "Short url is: " + shortened_url +
+  "\n Goodbye!"
+else
+  Visit.record_visit!(user, shortened_url)
+  puts "visit in your dreams!"
+end
